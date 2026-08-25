@@ -47,7 +47,7 @@ If the user already has a vault convention, preserve it.
 
 Formatting and scope rules:
 - Core info field schema: use only the following fields, in this order, and no free prose:
-  `Title`, `Title Translation`, `Authors`, `Affiliations`, `Publication Date`, `Venue`, `DOI`, `arXiv`, `Paper Link`, `Code / Project`, `Data / Resources`, `Paper Type`
+  `标题`, `标题翻译`, `作者`, `机构`, `发表时间`, `发表渠道`, `DOI`, `arXiv`, `论文链接`, `代码 / 项目`, `数据 / 资源`, `论文类型`
 - keep each entry in `- 字段名: 值` form
 - omit fields that are unavailable or not applicable; do not add placeholder rows just to fill the schema
 - do not add interpretation, commentary, judgment, or takeaway lines inside `核心信息`
