@@ -17,17 +17,17 @@ Priority order:
 
 ## Placement Logic
 
-- Put method overview figures in `### 机制流程` when they directly explain the core execution chain
-- If the match is weaker or the note does not need that micro-structure, keep them in `方法主线`
-- Put data or task figures in `数据与任务定义`
-- Put main result figures or tables in `关键结果`
-- Put conceptual diagrams in `研究问题` or `深度分析` if they clarify the argument
+- Put method overview figures in `### Mechanism Flow` when they directly explain the core execution chain
+- If the match is weaker or the note does not need that micro-structure, keep them in `Method Mainline`
+- Put data or task figures in `Data & Task Definition`
+- Put main result figures or tables in `Key Results`
+- Put conceptual diagrams in `Research Question` or `In-depth Analysis` if they clarify the argument
 
 ## What to Read
 
 Use:
 - figure captions
-- nearby正文对 figure 的引用
+- nearby正文对 figure 的References
 - section context
 - candidate pages and candidate images from deterministic PDF asset extraction
 

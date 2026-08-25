@@ -20,30 +20,30 @@ from contracts import (
 REQUIRED_SECTIONS = NOTE_REQUIRED_SECTIONS
 
 CORE_INFO_FIELDS = [
-    "标题",
-    "标题翻译",
-    "作者",
-    "机构",
-    "发表时间",
-    "发表渠道",
+    "Title",
+    "Title Translation",
+    "Authors",
+    "Affiliations",
+    "Publication Date",
+    "Venue",
     "DOI",
     "arXiv",
-    "论文链接",
-    "代码 / 项目",
-    "数据 / 资源",
-    "论文类型",
+    "Paper Link",
+    "Code / Project",
+    "Data / Resources",
+    "Paper Type",
 ]
 
 CORE_INFO_FIELD_INDEX = {field: idx for idx, field in enumerate(CORE_INFO_FIELDS)}
 
 FIGURE_TARGET_SECTIONS = {
-    "研究问题",
-    "数据与任务定义",
-    "方法主线",
-    "关键结果",
-    "深度分析",
-    "局限",
-    "我的笔记",
+    "Research Question",
+    "Data & Task Definition",
+    "Method Mainline",
+    "Key Results",
+    "In-depth Analysis",
+    "Limitations",
+    "My Notes",
 }
 
 FIGURE_BUCKET_RESIDUE_TOKENS = {
@@ -322,7 +322,7 @@ def find_missing_sections(text: str) -> list[str]:
 
 def front_matter_order_warnings(text: str) -> list[str]:
     warnings: list[str] = []
-    required_order = ["## 原文摘要翻译", "## 创新点", "## 一句话总结"]
+    required_order = ["## Original Abstract Translation", "## Key Contributions", "## One-sentence Summary"]
     positions = []
     for section in required_order:
         idx = text.find(section)
@@ -469,7 +469,7 @@ GENERIC_LIMITATION_PATTERNS = [
 ]
 
 HONEST_MISSING_TOKENS = ("本文未给出", "论文未给出", "未报告", "没有报告", "未提供")
-HONEST_MISSING_BASIS_TOKENS = ("依据", "正文", "附录", "表格", "coverage", "作者")
+HONEST_MISSING_BASIS_TOKENS = ("依据", "正文", "附录", "表格", "coverage", "Authors")
 HONEST_MISSING_IMPACT_TOKENS = ("影响", "限制", "受限", "不能", "无法", "结论强度")
 
 DOUBLE_ESCAPED_TEX_COMMANDS = {
@@ -512,9 +512,9 @@ def is_exempt_line(line: str) -> bool:
         return True
     if (
         stripped.startswith("> [!figure]")
-        or stripped.startswith("> 建议位置：")
-        or stripped.startswith("> 放置原因：")
-        or stripped.startswith("> 当前状态：")
+        or stripped.startswith("> Suggested placement: ")
+        or stripped.startswith("> Placement rationale: ")
+        or stripped.startswith("> Current status: ")
     ):
         return True
     if re.search(r"https?://", stripped):
@@ -556,7 +556,7 @@ def mixed_language_issues(text: str) -> list[dict[str, object]]:
         stripped = line.strip()
         section_name = section_name_for_line(lines, idx - 1)
         subsection_name = subsection_name_for_line(lines, idx - 1)
-        if section_name in {"核心信息", "引用"}:
+        if section_name in {"Core Info", "References"}:
             continue
         if not re.search(r"[\u4e00-\u9fff]", stripped):
             continue
@@ -620,11 +620,11 @@ def inspect_figure_callouts(text: str) -> list[str]:
             nxt = lines[j].strip()
             if not nxt.startswith(">"):
                 break
-            if nxt.startswith("> 建议位置："):
+            if nxt.startswith("> Suggested placement: "):
                 has_location = True
-            if nxt.startswith("> 放置原因："):
+            if nxt.startswith("> Placement rationale: "):
                 has_reason = True
-            if nxt.startswith("> 当前状态："):
+            if nxt.startswith("> Current status: "):
                 has_status = True
             j += 1
         if not has_location:
@@ -648,9 +648,9 @@ def figure_callout_title(line: str) -> str:
 
 def figure_status_text(line: str) -> str:
     stripped = line.strip()
-    if not stripped.startswith("> 当前状态："):
+    if not stripped.startswith("> Current status: "):
         return ""
-    return stripped.removeprefix("> 当前状态：").strip()
+    return stripped.removeprefix("> Current status: ").strip()
 
 
 def has_accepted_usable_placeholder_reason(status_text: str) -> bool:
@@ -748,8 +748,8 @@ def figure_callout_placement_issues(text: str) -> list[dict[str, object]]:
             nxt = lines[j].strip()
             if not nxt.startswith(">"):
                 break
-            if nxt.startswith("> 建议位置："):
-                location = nxt.removeprefix("> 建议位置：").strip()
+            if nxt.startswith("> Suggested placement: "):
+                location = nxt.removeprefix("> Suggested placement: ").strip()
                 break
             j += 1
 
@@ -919,14 +919,14 @@ def figure_structure_passes(text: str) -> bool:
 
 
 def core_info_structure_issues(text: str) -> list[dict[str, object]]:
-    body = section_body(text, "核心信息")
+    body = section_body(text, "Core Info")
     if not body:
         return []
 
     issues: list[dict[str, object]] = []
     seen_fields: set[str] = set()
     last_known_index = -1
-    base_line = _line_number_from_offset(text, text.find("## 核心信息"))
+    base_line = _line_number_from_offset(text, text.find("## Core Info"))
 
     for offset, raw_line in enumerate(body.splitlines(), start=1):
         stripped = raw_line.strip()
@@ -1304,14 +1304,14 @@ def cleaned_section_lines(body: str) -> list[str]:
             continue
         if (
             stripped.startswith("> [!figure]")
-            or stripped.startswith("> 建议位置：")
-            or stripped.startswith("> 放置原因：")
-            or stripped.startswith("> 当前状态：")
+            or stripped.startswith("> Suggested placement: ")
+            or stripped.startswith("> Placement rationale: ")
+            or stripped.startswith("> Current status: ")
         ):
             continue
         if stripped.startswith("!["):
             continue
-        if stripped.startswith("*论文原图编号：") and stripped.endswith("*"):
+        if stripped.startswith("*Original figure ID: ") and stripped.endswith("*"):
             continue
         if stripped.startswith("> "):
             stripped = stripped[2:].strip()
@@ -1417,53 +1417,53 @@ def inspect_substantive_content(text: str) -> list[dict[str, object]]:
         content = normalized_section_content(body)
         if is_placeholder_like(content):
             issues.append(issue(section, "section_empty_shell", "error", content or section))
-        if section not in {"关键结果", "引用"} and is_honest_missing_declaration(content):
+        if section not in {"Key Results", "References"} and is_honest_missing_declaration(content):
             issues.append(issue(section, "section_honest_missing_not_allowed", "error", content))
 
-    innovation = section_body(text, "创新点")
+    innovation = section_body(text, "Key Contributions")
     innovation_content = normalized_section_content(innovation)
     innovation_units = meaningful_units(innovation, GENERIC_INNOVATION_PATTERNS)
     if not innovation_units:
-        issues.append(issue("创新点", "innovation_empty_shell", "error", innovation_content))
+        issues.append(issue("Key Contributions", "innovation_empty_shell", "error", innovation_content))
     elif len(innovation_units) < 2:
-        issues.append(issue("创新点", "innovation_too_few_specific_points", "warning", innovation_content))
+        issues.append(issue("Key Contributions", "innovation_too_few_specific_points", "warning", innovation_content))
 
-    key_results = section_body(text, "关键结果")
+    key_results = section_body(text, "Key Results")
     key_results_content = normalized_section_content(key_results)
     if is_honest_missing_declaration(key_results_content):
         issues.append(
             issue(
-                "关键结果",
+                "Key Results",
                 "key_results_honest_missing_not_allowed",
                 "error",
                 key_results_content,
             )
         )
     elif not meaningful_units(key_results, GENERIC_KEY_RESULT_PATTERNS):
-        issues.append(issue("关键结果", "key_results_empty_shell", "error", key_results_content))
+        issues.append(issue("Key Results", "key_results_empty_shell", "error", key_results_content))
     elif not has_number_token(key_results_content):
         issues.append(
             issue(
-                "关键结果",
+                "Key Results",
                 "key_results_quantitative_result_missing",
                 "warning",
                 key_results_content,
             )
         )
 
-    references = section_body(text, "引用")
+    references = section_body(text, "References")
     references_content = normalized_section_content(references)
     if is_honest_missing_declaration(references_content):
-        issues.append(issue("引用", "references_unavailable_declared", "warning", references_content))
+        issues.append(issue("References", "references_unavailable_declared", "warning", references_content))
     elif is_placeholder_like(references_content) or not has_reference_entry(references_content):
-        issues.append(issue("引用", "references_placeholder", "error", references_content))
+        issues.append(issue("References", "references_placeholder", "error", references_content))
 
-    limitations = section_body(text, "局限")
+    limitations = section_body(text, "Limitations")
     limitations_content = normalized_section_content(limitations)
     if not meaningful_units(limitations, GENERIC_LIMITATION_PATTERNS):
-        issues.append(issue("局限", "limitations_empty_shell", "error", limitations_content))
+        issues.append(issue("Limitations", "limitations_empty_shell", "error", limitations_content))
 
-    for section in ("方法主线", "深度分析"):
+    for section in ("Method Mainline", "In-depth Analysis"):
         body = section_body(text, section)
         content = normalized_section_content(body)
         if not meaningful_units(body):
@@ -1481,7 +1481,7 @@ def inspect_substantive_content(text: str) -> list[dict[str, object]]:
 
 
 def method_section_requires_mechanism_flow(text: str) -> bool:
-    body = section_body(text, "方法主线")
+    body = section_body(text, "Method Mainline")
     if not body:
         return False
     lower = body.lower()
@@ -1494,11 +1494,11 @@ def mechanism_flow_warnings(text: str) -> list[str]:
     warnings: list[str] = []
     if not method_section_requires_mechanism_flow(text):
         return warnings
-    if "### 机制流程" not in text:
+    if "### Mechanism Flow" not in text:
         warnings.append("mechanism_flow_subsection_missing")
         return warnings
 
-    body = subsection_body(text, "方法主线", "机制流程")
+    body = subsection_body(text, "Method Mainline", "Mechanism Flow")
     if not body:
         warnings.append("mechanism_flow_subsection_empty")
         return warnings

@@ -219,10 +219,10 @@ def test_search_encodes_unicode_and_doi_queries_without_api_key() -> None:
     transport, calls = routed_transport(routes)
     client = ZoteroLocalClient(transport=transport)
 
-    client.search_top_items("中文 标题", qmode="titleCreatorYear")
+    client.search_top_items("中文 Title", qmode="titleCreatorYear")
     client.search_top_items("10.1000/test(1)/part", qmode="everything")
 
-    assert calls[1]["query"]["q"] == ["中文 标题"]
+    assert calls[1]["query"]["q"] == ["中文 Title"]
     assert calls[1]["query"]["qmode"] == ["titleCreatorYear"]
     assert calls[1]["query"]["itemType"] == ["-attachment"]
     assert "limit" not in calls[1]["query"]

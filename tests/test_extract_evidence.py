@@ -1112,9 +1112,9 @@ def test_bundle_removes_top_n_evidence_and_uses_compact_contract() -> None:
     assert "section_id" in contract["grounding_contract"]["accepted_reference_forms"]
     assert "pages" in contract["grounding_contract"]["accepted_reference_forms"]
     assert any("工程含义" in rule for rule in formula_rules)
-    assert method_contract["section_semantics"]["方法主线"] == "模型、算法、训练或推理机制。"
-    assert method_contract["recommended_subsections"]["方法主线"] == [
-        "机制流程",
+    assert method_contract["section_semantics"]["Method Mainline"] == "模型、算法、训练或推理机制。"
+    assert method_contract["recommended_subsections"]["Method Mainline"] == [
+        "Mechanism Flow",
         "模型结构",
         "训练目标",
         "推理与采样链路",

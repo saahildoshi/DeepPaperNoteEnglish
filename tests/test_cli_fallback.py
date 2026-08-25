@@ -329,7 +329,7 @@ def test_write_note_refuses_runtime_artifact_reference_without_lint_json(tmp_pat
             "--title",
             "Direct Reference Hygiene Test",
             "--content",
-            "# Direct Reference Hygiene Test\n\n## 引用\n\n- /private/tmp/dpn-test-runs/candidate/artifacts/llama_source_manifest.json\n",
+            "# Direct Reference Hygiene Test\n\n## References\n\n- /private/tmp/dpn-test-runs/candidate/artifacts/llama_source_manifest.json\n",
         ],
         cwd=tmp_path,
         env=env,

@@ -517,7 +517,7 @@ def test_propose_keeps_term_shaped_emphasis(term: str) -> None:
     assert candidate["occurrences"] == 1
 
 
-@pytest.mark.parametrize("heading", ["参考文献", "引用"])
+@pytest.mark.parametrize("heading", ["参考文献", "References"])
 def test_propose_removes_chinese_reference_tail_from_single_record(
     heading: str,
 ) -> None:

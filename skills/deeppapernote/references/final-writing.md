@@ -31,12 +31,12 @@ Near the beginning of the note, include:
 `## Core Info` is a fixed metadata block, not an analysis block.
 Rules for this section:
 - Core info field schema: use only the following fields, in this order, and no free prose:
-  `标题`, `标题翻译`, `作者`, `机构`, `发表时间`, `发表渠道`, `DOI`, `arXiv`, `论文链接`, `代码 / 项目`, `数据 / 资源`, `论文类型`
+  `Title`, `Title Translation`, `Authors`, `Affiliations`, `Publication Date`, `Venue`, `DOI`, `arXiv`, `Paper Link`, `Code / Project`, `Data / Resources`, `Paper Type`
 - keep each line in `- 字段名: 值` form
 - omit fields that are unavailable or not applicable; do not add `未知`, `无`, or placeholder rows just to fill the schema
 - do not add ad hoc fields such as judgments, takeaways, or mini-summaries
 - do not move explanatory prose, evaluation, or "my view" sentences into this section
-- move any paper-positioning or guide sentence to `一句话总结` or an analysis section, not under `核心信息`
+- move any paper-positioning or guide sentence to `One-sentence Summary` or an analysis section, not under `Core Info`
 
 The `Original Abstract Translation` section should be a faithful English translation of the paper's original abstract when translation is needed:
 - if the abstract is available, translate the original abstract into English before the one-sentence summary
@@ -158,14 +158,14 @@ Examples:
 - `### 哪些地方容易被误读`
 
 For technical papers, also strongly consider subsections such as:
-- `### 机制流程`
+- `### Mechanism Flow`
 - `### 训练目标`
 - `### 推理与采样链路`
 - `### 关键实现细节`
 - `### 复杂度与扩展性`
 - `### 消融到底说明了什么`
 
-For method, framework, and system papers, prefer an explicit `### 机制流程` subsection instead of hiding the execution chain inside generic prose.
+For method, framework, and system papers, prefer an explicit `### Mechanism Flow` subsection instead of hiding the execution chain inside generic prose.
 That subsection should usually be a 3 to 4 step numbered list covering:
 - what the Input is
 - what the main intermediate transformations are
@@ -173,7 +173,7 @@ That subsection should usually be a 3 to 4 step numbered list covering:
 - what the training or inference loop is actually doing
 - do not rely on a damaged Algorithm block to carry this explanation for you
 - do not let the steps collapse into module-name listing; each step should describe an operation
-- if a high-confidence pipeline or architecture figure matches this execution chain, place it in `### 机制流程`
+- if a high-confidence pipeline or architecture figure matches this execution chain, place it in `### Mechanism Flow`
 
 ## Formula Rule
 
@@ -235,7 +235,7 @@ Before outputting the final Markdown, first run `final_quality_review` and expli
 - does the note contain concrete numbers, dimensions, complexity terms, or formulas when the paper clearly depends on them?
 - can a reader familiar with Python and deep learning frameworks follow the core method from this note alone?
 - does the method section explain the mechanism rather than only summarize the claim?
-- if this is a method/system/framework paper, does `方法主线` explicitly contain `### 机制流程` with a 3 to 4 step numbered list?
+- if this is a method/system/framework paper, does `Method Mainline` explicitly contain `### Mechanism Flow` with a 3 to 4 step numbered list?
 - if the raw source reports negative or unstable ablation settings, did the note include at least one of them?
 - if the raw source does not clearly report such settings, did the note avoid inventing failed or unstable cases?
 - does the note contain at least one honest limitation and one paper-specific insight?

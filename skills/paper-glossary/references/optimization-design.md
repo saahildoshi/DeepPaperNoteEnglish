@@ -35,7 +35,7 @@ Store device-local configuration in `~/.paper-glossary/config.json`:
 
 ```json
 {
-  "vault_root": "F:\\我的笔记\\123",
+  "vault_root": "F:\\My Notes\\123",
   "terms_subdir": "book\\术语"
 }
 ```
@@ -188,4 +188,4 @@ Run the focused paper-glossary tests and the repository's normal full test suite
 
 ## Current Demo Cleanup
 
-The earlier demo wrote notes to `F:\我的笔记\123\学习\hello_agent\术语`. Do not migrate those notes blindly. After implementation passes tests, rerun preview for the chapter-four article with the improved filter, let the user select from the corrected shortlist, merge approved content into the configured central library, add article outlinks, and only then remove assistant-created demo files after confirming they contain no later user edits.
+The earlier demo wrote notes to `F:\My Notes\123\学习\hello_agent\术语`. Do not migrate those notes blindly. After implementation passes tests, rerun preview for the chapter-four article with the improved filter, let the user select from the corrected shortlist, merge approved content into the configured central library, add article outlinks, and only then remove assistant-created demo files after confirming they contain no later user edits.

@@ -65,7 +65,7 @@ def classify_caption_kind(item_id: str, caption: str) -> tuple[str, str, str]:
         r"(?:produces|achieves|outperforms|improves|reduces|increases)\b",
         text,
     ):
-        return "main_result", "关键结果", "这张图或表直接承载主结果，适合放在关键结果部分。"
+        return "main_result", "Key Results", "这张图或表直接承载主结果，适合放在Key Results部分。"
     if any(
         token in text
         for token in [
@@ -79,7 +79,7 @@ def classify_caption_kind(item_id: str, caption: str) -> tuple[str, str, str]:
             "identification of studies",
         ]
     ):
-        return "data_or_task_overview", "数据与任务定义", "这张图解释文献筛选或纳入流程；如果候选图质量足够，适合放在数据与任务定义部分帮助读者理解综述证据来源。"
+        return "data_or_task_overview", "Data & Task Definition", "这张图解释文献筛选或纳入流程；如果候选图质量足够，适合放在Data & Task Definition部分帮助读者理解综述证据来源。"
     if any(
         token in text
         for token in [
@@ -94,7 +94,7 @@ def classify_caption_kind(item_id: str, caption: str) -> tuple[str, str, str]:
             "process",
         ]
     ):
-        return "method_overview", "机制流程", "这张图概括了整体方法或系统流程；如果匹配置信度足够高，最适合放在 `### 机制流程` 帮助快速建立执行链理解。"
+        return "method_overview", "Mechanism Flow", "这张图概括了整体方法或系统流程；如果匹配置信度足够高，最适合放在 `### Mechanism Flow` 帮助快速建立执行链理解。"
     if any(
         token in text
         for token in [
@@ -108,7 +108,7 @@ def classify_caption_kind(item_id: str, caption: str) -> tuple[str, str, str]:
             "issue",
         ]
     ):
-        return "data_or_task_overview", "数据与任务定义", "这张图解释任务或数据集如何被构造；如果候选图质量足够，适合放在数据与任务定义部分帮助读者理解数据来源。"
+        return "data_or_task_overview", "Data & Task Definition", "这张图解释任务或数据集如何被构造；如果候选图质量足够，适合放在Data & Task Definition部分帮助读者理解数据来源。"
     if any(
         token in text
         for token in [
@@ -125,7 +125,7 @@ def classify_caption_kind(item_id: str, caption: str) -> tuple[str, str, str]:
             "attribute",
         ]
     ):
-        return "data_or_task", "数据与任务定义", "这张图更像任务设定或数据说明，放在数据与任务定义最合适。"
+        return "data_or_task", "Data & Task Definition", "这张图更像任务设定或数据说明，放在Data & Task Definition最合适。"
     if any(
         token in text
         for token in [
@@ -142,10 +142,10 @@ def classify_caption_kind(item_id: str, caption: str) -> tuple[str, str, str]:
             "block translation",
         ]
     ):
-        return "method_detail", "方法主线", "这张图解释方法内部机制或关键执行状态，适合放在方法主线部分作为机制细节占位。"
+        return "method_detail", "Method Mainline", "这张图解释方法内部机制或关键执行状态，适合放在Method Mainline部分作为机制细节占位。"
     if item_id.lower().startswith("table"):
-        return "table_result", "关键结果", "这是关键结果表，适合放在关键结果部分辅助定位核心数值。"
-    return "supporting_figure", "深度分析", "这张图更适合作为补充图，放在深度分析部分帮助解释作者论点。"
+        return "table_result", "Key Results", "这是Key Results表，适合放在Key Results部分辅助定位核心数值。"
+    return "supporting_figure", "In-depth Analysis", "这张图更适合作为补充图，放在In-depth Analysis部分帮助解释Authors论点。"
 
 
 def build_figure_items(evidence_pack: dict, *, limit: int = 12) -> list[dict]:
