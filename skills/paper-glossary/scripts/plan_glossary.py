@@ -64,7 +64,7 @@ CJK_RE = re.compile(r"[\u3400-\u9fff]")
 CAPITALIZED_TERM_TOKEN_RE = re.compile(r"[A-Z0-9][A-Za-z0-9+./-]*")
 URL_RE = re.compile(r"https?://\S+")
 REFERENCE_TAIL_RE = re.compile(
-    r"(?ims)^#{1,6}\s*(?:references|参考文献|引用)\s*$.*\Z"
+    r"(?ims)^#{1,6}\s*(?:references|参考文献|References)\s*$.*\Z"
 )
 EMPHASIS_RE = re.compile(
     r"(?:(?:\*\*|__)([^\n*_]{2,80})(?:\*\*|__)|"

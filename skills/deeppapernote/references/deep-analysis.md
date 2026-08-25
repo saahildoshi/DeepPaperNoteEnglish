@@ -201,7 +201,7 @@ Seed future follow-up with prompts such as:
 When the paper has useful visuals:
 - preserve placeholders for the important ones
 - prioritize one method figure, one data/task figure, and one result figure or table
-- if a high-confidence pipeline or architecture figure clearly matches the core execution chain, place it in `### 机制流程` first
+- if a high-confidence pipeline or architecture figure clearly matches the core execution chain, place it in `### Mechanism Flow` first
 - explain why each figure matters
 - keep original paper numbering such as `Fig. 1` or `Table 2`
 

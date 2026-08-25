@@ -16,24 +16,24 @@ The note is high quality only if it satisfies most of the checks below.
 ## Structural Checks
 
 The note should usually include:
-- `核心信息`
-- `原文摘要翻译`
-- `创新点`
-- `一句话总结`
-- `研究问题`
-- `数据与任务定义`
-- `方法主线`
-- `关键结果`
-- `深度分析`
-- `局限`
-- `我的笔记`
-- `引用`
+- `Core Info`
+- `Original Abstract Translation`
+- `Key Contributions`
+- `One-sentence Summary`
+- `Research Question`
+- `Data & Task Definition`
+- `Method Mainline`
+- `Key Results`
+- `In-depth Analysis`
+- `Limitations`
+- `My Notes`
+- `References`
 
 For non-trivial papers, it should usually also include multiple `###` subheadings inside:
-- `数据与任务定义`
-- `方法主线`
-- `关键结果`
-- `深度分析`
+- `Data & Task Definition`
+- `Method Mainline`
+- `Key Results`
+- `In-depth Analysis`
 
 Before the final note is written, the run should already have an inspectable, grounded plan whose analytical commitments are paper-specific.
 
@@ -57,7 +57,7 @@ Bad sign:
 - It lists model names without explaining the pipeline.
 - It copies metrics without noting the evaluation setting.
 - It says the paper is innovative without locating the innovation.
-- It has no dedicated `创新点` section and leaves the paper's novelty scattered across the note.
+- It has no dedicated `Key Contributions` section and leaves the paper's novelty scattered across the note.
 - It uses generic limitations such as "future work can use more data" and nothing more specific.
 - It flattens a technically rich paper into only `##` headings with no internal structure.
 
@@ -89,8 +89,8 @@ For technical papers, strong notes should usually also contain:
 - at least one key formula or formal expression when the paper's contribution depends on it
 - formulas rendered as math rather than code formatting
 
-When abstract metadata exists, strong notes should also make `原文摘要翻译` a faithful Chinese translation of the abstract:
+When abstract metadata exists, strong notes should also make `Original Abstract Translation` a faithful Chinese translation of the abstract:
 - translate the original abstract into Chinese rather than rewriting it as your own summary
 - avoid reducing it to a shorter interpretation-only summary
-- keep this section as `原文摘要翻译`, not a bilingual original-plus-translation block
+- keep this section as `Original Abstract Translation`, not a bilingual original-plus-translation block
 - do not mix innovation takeaways, evaluation, or post-hoc interpretation into this section

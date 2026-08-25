@@ -333,7 +333,7 @@ FENCED_CODE_RE = re.compile(r"(?ms)^(?:`{3,}|~{3,})[^\n]*\n.*?^(?:`{3,}|~{3,})\s
 INLINE_CODE_RE = re.compile(r"`+[^`\n]+`+")
 MARKDOWN_LINK_RE = re.compile(r"\[([^\]]+)\]\([^\)]+\)")
 URL_RE = re.compile(r"https?://\S+")
-REFERENCE_TAIL_RE = re.compile(r"(?ims)^#{1,6}\s*(?:references|参考文献|引用)\s*$.*\Z")
+REFERENCE_TAIL_RE = re.compile(r"(?ims)^#{1,6}\s*(?:references|参考文献|References)\s*$.*\Z")
 EMPHASIS_RE = re.compile(r"(?:\*\*|__)([^\n*_]{2,80})(?:\*\*|__)")
 STRONG_RE = re.compile(r"(?is)<strong>([^<]{2,80})</strong>")
 
@@ -948,9 +948,9 @@ Review `git diff --stat`, `git diff --check`, and `git status --short`. Confirm 
 
 **Files:**
 - Runtime config: `~/.paper-glossary/config.json`
-- Input article: `F:\我的笔记\123\学习\hello_agent\docs\chapter4\第四章 智能体经典范式构建.md`
-- Central library: `F:\我的笔记\123\book\术语`
-- Existing demo directory retained for now: `F:\我的笔记\123\学习\hello_agent\术语`
+- Input article: `F:\My Notes\123\学习\hello_agent\docs\chapter4\第四章 智能体经典范式构建.md`
+- Central library: `F:\My Notes\123\book\术语`
+- Existing demo directory retained for now: `F:\My Notes\123\学习\hello_agent\术语`
 
 **Interfaces:**
 - Consumes the completed Tasks 1-6 implementation
@@ -961,17 +961,17 @@ Review `git diff --stat`, `git diff --check`, and `git status --short`. Confirm 
 Run:
 
 ```powershell
-python -X utf8 skills\paper-glossary\scripts\configure_glossary.py --terms-dir 'F:\我的笔记\123\book\术语' --output tmp\paper-glossary-chapter4-demo\device_config_result.json
+python -X utf8 skills\paper-glossary\scripts\configure_glossary.py --terms-dir 'F:\My Notes\123\book\术语' --output tmp\paper-glossary-chapter4-demo\device_config_result.json
 ```
 
-Expected: config points to nearest vault `F:\我的笔记\123` and relative directory `book\术语`.
+Expected: config points to nearest vault `F:\My Notes\123` and relative directory `book\术语`.
 
 - [ ] **Step 2: Validate the explicit article and capture its preview hash**
 
 Run:
 
 ```powershell
-python -X utf8 skills\paper-glossary\scripts\configure_glossary.py --validate-article 'F:\我的笔记\123\学习\hello_agent\docs\chapter4\第四章 智能体经典范式构建.md' --output tmp\paper-glossary-chapter4-demo\article_validation.json
+python -X utf8 skills\paper-glossary\scripts\configure_glossary.py --validate-article 'F:\My Notes\123\学习\hello_agent\docs\chapter4\第四章 智能体经典范式构建.md' --output tmp\paper-glossary-chapter4-demo\article_validation.json
 ```
 
 Expected: article and term library resolve to the same vault and output contains `article_sha256`.
@@ -996,7 +996,7 @@ python -X utf8 skills\paper-glossary\scripts\plan_glossary.py --review-proposal 
 
 Expected: `glossary_reviewed_shortlist.json` contains the exact retained full candidate objects, ordered forms, and proposal/review provenance. Display every retained item from this reviewed artifact as a numbered Markdown list together with:
 
-- `F:\我的笔记\123\book\术语` as the write destination;
+- `F:\My Notes\123\book\术语` as the write destination;
 - the exact chapter Markdown path as the link target;
 - the statement that selecting terms will create/enrich notes and add first safe article links;
 - the statement that no files have yet been written.
@@ -1005,7 +1005,7 @@ End the response and wait for the user's numbers, names, or `全部写入`. This
 
 - [ ] **Step 5: Preserve old demo output until the corrected flow is approved**
 
-Do not move or delete `F:\我的笔记\123\学习\hello_agent\术语` during preview. After a later explicit selection completes the new write/link/lint flow, compare those assistant-created demo files with their recorded content and ask before removing any file that may contain later user edits.
+Do not move or delete `F:\My Notes\123\学习\hello_agent\术语` during preview. After a later explicit selection completes the new write/link/lint flow, compare those assistant-created demo files with their recorded content and ask before removing any file that may contain later user edits.
 
 ---
 

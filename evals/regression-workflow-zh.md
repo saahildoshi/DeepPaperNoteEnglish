@@ -111,7 +111,7 @@ figure/table 和保存契约。它不评价最终正文质量。
 - 如有旧笔记或 baseline 笔记更好
 - 覆盖不同压力点
 
-尽量覆盖这些论文类型：
+尽量覆盖这些Paper Type：
 
 - benchmark 或 evaluation paper
 - method、model 或 system paper
@@ -421,7 +421,7 @@ evaluator 必须：
 - 只比较原始笔记
 - 运行所有 hard gates
 - 给 8 个 rubric 维度打分
-- 为重要分差引用证据
+- 为重要分差References证据
 - 判断 candidate 是否优于 baseline
 - 输出 rubric JSON report
 

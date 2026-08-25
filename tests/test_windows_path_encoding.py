@@ -151,7 +151,7 @@ def _clean_env() -> dict[str, str]:
 
 def test_lint_note_detects_title_in_bom_crlf_note(tmp_path: Path) -> None:
     note = tmp_path / "note.md"
-    content = "---\ntags:\n  - papers/x\n---\n# 标题\n\n正文\n".replace("\n", "\r\n")
+    content = "---\ntags:\n  - papers/x\n---\n# Title\n\n正文\n".replace("\n", "\r\n")
     note.write_bytes(BOM.encode("utf-8") + content.encode("utf-8"))
     result = subprocess.run(
         [sys.executable, str(SCRIPTS / "lint_note.py"), "--input", str(note)],
@@ -171,7 +171,7 @@ def test_write_obsidian_note_strips_bom_from_saved_note(tmp_path: Path) -> None:
     vault.mkdir()
     content_file = tmp_path / "note.md"
     content_file.write_bytes(
-        BOM.encode("utf-8") + "# 标题\n\n正文内容。\n".encode("utf-8")
+        BOM.encode("utf-8") + "# Title\n\n正文内容。\n".encode("utf-8")
     )
     result = subprocess.run(
         [
@@ -192,7 +192,7 @@ def test_write_obsidian_note_strips_bom_from_saved_note(tmp_path: Path) -> None:
     # The BOM must not survive into the saved note (it breaks Obsidian
     # frontmatter / the H1 title).
     assert not saved.startswith(BOM)
-    assert saved.lstrip().startswith("# 标题")
+    assert saved.lstrip().startswith("# Title")
 
 
 def test_materialize_figure_asset_embed_uses_forward_slashes(tmp_path: Path) -> None:
