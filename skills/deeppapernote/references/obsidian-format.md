@@ -7,7 +7,7 @@
 - Use `###` only when a section genuinely needs internal structure.
 - Do not flatten everything into bullet points.
 - For method, system, benchmark, or clinical empirical papers, prefer meaningful `###` subheadings in technical sections instead of one long undifferentiated block.
-- For method, framework, or system papers, default to `### 机制流程` inside `方法主线` and write it as a numbered 3 to 4 step flow.
+- For method, framework, or system papers, default to `### Mechanism Flow` inside `Method Mainline` and write it as a numbered 3 to 4 step flow.
 
 ## File Naming
 
@@ -43,16 +43,16 @@ If the user already has a vault convention, preserve it.
 
 ## Core Info Block
 
-`## 核心信息` is a fixed metadata zone.
+`## Core Info` is a fixed metadata zone.
 
 Formatting and scope rules:
 - Core info field schema: use only the following fields, in this order, and no free prose:
-  `标题`, `标题翻译`, `作者`, `机构`, `发表时间`, `发表渠道`, `DOI`, `arXiv`, `论文链接`, `代码 / 项目`, `数据 / 资源`, `论文类型`
+  `Title`, `Title Translation`, `Authors`, `Affiliations`, `Publication Date`, `Venue`, `DOI`, `arXiv`, `Paper Link`, `Code / Project`, `Data / Resources`, `Paper Type`
 - keep each entry in `- 字段名: 值` form
 - omit fields that are unavailable or not applicable; do not add placeholder rows just to fill the schema
 - do not add interpretation, commentary, judgment, or takeaway lines inside `核心信息`
 - do not use the last metadata bullet as a place to append extra analysis
-- move explanatory content to `一句话总结`、`深度分析`、`我的笔记` or another true analysis section
+- move explanatory content to `One-sentence Summary`, `In-depth Analysis`, `My Notes` or another true analysis section
 
 ## YAML Frontmatter
 
@@ -87,10 +87,10 @@ Rules:
 Use this callout format only for placeholders that remain unresolved in the final note:
 
 ```md
-> [!figure] Fig. 3 数据分布与质量评估
-> 建议位置：数据与任务定义
-> 放置原因：这张图同时展示样本构成、对话长度统计和专家质检结果，是理解 `PsyInterview` 数据边界最重要的图之一。
-> 当前状态：保留占位；当前提取结果只拿到局部子图，无法稳定恢复成可独立解释的完整原图。
+> [!figure] Fig. 3 Data distribution and quality assessment
+> Suggested placement: Data & Task Definition
+> Placement rationale: this figure simultaneously shows sample composition, dialog-length statistics, and expert quality checks; it is one of the most important figures for understanding the `PsyInterview` data boundary.
+> Current status: keep placeholder; the current extraction only retrieved a local subfigure and cannot be stably reconstructed as a standalone original image.
 ```
 
 Formatting rules:
@@ -118,30 +118,30 @@ The embed must be followed immediately by exactly one italic caption line:
 
 ## Default Section Order
 
-1. `核心信息`
-2. `原文摘要翻译`
-3. `创新点`
-4. `一句话总结`
-5. `研究问题`
-6. `数据与任务定义`
-7. `方法主线`
-8. `关键结果`
-9. `深度分析`
-10. `局限`
-11. `我的笔记`
-12. `引用`
+1. `Core Info`
+2. `Original Abstract Translation`
+3. `Key Contributions`
+4. `One-sentence Summary`
+5. `Research Question`
+6. `Data & Task Definition`
+7. `Method Mainline`
+8. `Key Results`
+9. `In-depth Analysis`
+10. `Limitations`
+11. `My Notes`
+12. `References`
 
 When abstract metadata exists, `原文摘要翻译` should be a single Chinese translation block for the original abstract rather than a bilingual subsection pair.
 
 This order is the stable backbone, not a full outline.
 When the paper is complex, add `###` subsections such as:
-- `### 数据来源`
-- `### 任务定义`
-- `### 机制流程`
-- `### 为什么结果成立`
-- `### 哪些地方容易被误读`
+- `### Data Sources`
+- `### Task Definition`
+- `### Mechanism Flow`
+- `### Why the Results Hold`
+- `### Potential Misinterpretations`
 
-## 引用 Section Format
+## References Section Format
 
 Entries in `## 引用` should link to existing notes in the vault where possible.
 If the synthesis bundle includes `references.candidates`, use confirmed candidate `wikilink` values when present. When `wikilink` is empty, treat `display_text` as the plain-text fallback.

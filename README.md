@@ -4,7 +4,7 @@
 
 **Turn one complex paper into an Obsidian note you will actually want to keep.**
 
-[English](./README.md) | [简体中文](./README.zh-CN.md)
+[English](./README.md) | [Chinese (Simplified)](./README.zh-CN.md)
 
 [![Homepage](https://img.shields.io/badge/homepage-online-2563eb)](https://917dhj.github.io/DeepPaperNote/)
 [![Status](https://img.shields.io/badge/status-stable-16a34a)](https://github.com/917Dhj/DeepPaperNote)
@@ -78,7 +78,7 @@ Generate a deep-reading note for this paper: <title, DOI, URL, arXiv ID, or loca
 Turn this paper into an Obsidian note: <paper>
 ```
 
-DeepPaperNote currently generates Chinese notes by default, and its writing and validation rules are optimized for Chinese output.
+Strictly generate all final research notes and summaries in standard academic English.
 
 ## 🎯 Why DeepPaperNote?
 

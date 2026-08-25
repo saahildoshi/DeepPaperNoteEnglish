@@ -23,33 +23,33 @@ Include at least:
 Do not invent placeholder metadata values. Omit unavailable fields instead.
 
 Near the beginning of the note, include:
-- `## 核心信息`
-- `## 原文摘要翻译`
-- `## 创新点`
-- `## 一句话总结`
+- `## Core Info`
+- `## Original Abstract Translation`
+- `## Key Contributions`
+- `## One-sentence Summary`
 
-`## 核心信息` is a fixed metadata block, not an analysis block.
+`## Core Info` is a fixed metadata block, not an analysis block.
 Rules for this section:
 - Core info field schema: use only the following fields, in this order, and no free prose:
-  `标题`, `标题翻译`, `作者`, `机构`, `发表时间`, `发表渠道`, `DOI`, `arXiv`, `论文链接`, `代码 / 项目`, `数据 / 资源`, `论文类型`
+  `Title`, `Title Translation`, `Authors`, `Affiliations`, `Publication Date`, `Venue`, `DOI`, `arXiv`, `Paper Link`, `Code / Project`, `Data / Resources`, `Paper Type`
 - keep each line in `- 字段名: 值` form
 - omit fields that are unavailable or not applicable; do not add `未知`, `无`, or placeholder rows just to fill the schema
 - do not add ad hoc fields such as judgments, takeaways, or mini-summaries
 - do not move explanatory prose, evaluation, or "my view" sentences into this section
 - move any paper-positioning or guide sentence to `一句话总结` or an analysis section, not under `核心信息`
 
-The `原文摘要翻译` section should be a Chinese translation of the paper's original abstract:
-- if the abstract is available, translate the original abstract into Chinese before the one-sentence summary
+The `Original Abstract Translation` section should be a faithful English translation of the paper's original abstract when translation is needed:
+- if the abstract is available, translate the original abstract into English before the one-sentence summary
 - do not let the summary replace the abstract
-- do not treat `原文摘要翻译` as your own summary of the full paper; it is the original abstract translated into Chinese
-- do not split this section into `### 英文原文` and `### 中文翻译`
-- keep the section title exactly as `原文摘要翻译`
-- the `原文摘要翻译` section itself must be written in Chinese; do not output English abstract sentences or English-original paragraphs here
-- the Chinese abstract should be fluent and faithful, not a second `一句话总结`
-- do not turn `原文摘要翻译` into a selective excerpt or a compressed highlight list
-- do not add judgments, hindsight, or details learned from later sections of the paper into `原文摘要翻译`; only translate what the original abstract says
+- do not treat `Original Abstract Translation` as your own summary of the full paper; it should be a faithful translation of the original abstract
+- do not split this section into `### Original` and `### Translation`
+- keep the section title exactly as `Original Abstract Translation`
+- the `Original Abstract Translation` section itself should be written in clear academic English; do not insert unrelated excerpts
+- the translated abstract should be fluent and faithful, not a second `One-sentence Summary`
+- do not turn `Original Abstract Translation` into a selective excerpt or a compressed highlight list
+- do not add judgments, hindsight, or details learned from later sections of the paper into `Original Abstract Translation`; only translate what the original abstract says
 
-The `创新点` section should be a dedicated top-level section after `原文摘要翻译` rather than a hidden bullet buried later.
+The `Key Contributions` section should be a dedicated top-level section after `Original Abstract Translation` rather than a hidden bullet buried later.
 It should usually:
 - enumerate 3 to 5 paper-specific innovations
 - explain what problem each innovation addresses
@@ -93,7 +93,7 @@ Scripts are not enough on their own for:
 - nuanced judgment
 - identifying what is easy to misread
 - deciding what the paper's real contribution is
-- writing strong, natural Chinese analytical prose
+- writing strong, natural English analytical prose
 
 The language model should do all of the following:
 - use the grounded plan's selected paper type and section emphasis
@@ -103,7 +103,7 @@ The language model should do all of the following:
 - select the truly central results
 - reconstruct the method or analysis flow
 - decide whether the paper needs explicit LaTeX formulas for the core objective, factorization, or complexity
-- write the final note in clean Chinese
+- write the final note in clear academic English
 
 ## Final-Draft Standard
 
@@ -118,15 +118,15 @@ When the source comparison is naturally tabular, especially with three or more c
 Keep only the rows and metrics that matter for understanding the paper, and follow the table with interpretation of what the numbers mean.
 If a paper is short, do not make the final note shallow; use the saved space to explain protocol details, ablations, limitations, and deployment or replication implications.
 
-The final Chinese note must also pass a language-cleanliness check:
-- no half-English half-Chinese prose lines
+The final English note must also pass a language-cleanliness check:
+- no mixed-language prose lines; the prose should be fully English except for stable proper nouns, code tokens, or citation metadata
 - English is allowed only for stable proper nouns or citation metadata
 - if the style gate fails, do not write the note into Obsidian yet
 - do not write for the linter; lint is only a minimum floor, not the writing objective
 - after script lint passes, `final_quality_review` and then `final_readability_review` are still required before the note should be treated as polished and ready to save
 
-正文术语策略:
-- default to natural Chinese prose in正文分析
+Body terminology policy:
+- default to natural English prose in the main analysis
 - keep English only when it is a stable proper noun or source-faithful technical label
 - stable English that may remain:
   - model names
@@ -136,13 +136,13 @@ The final Chinese note must also pass a language-cleanliness check:
   - math symbols
   - code tokens
   - original paper figure/table ids
-- when any of the above retained English terms or standalone key numbers appear inline within Chinese prose, wrap them in backticks for visual separation
-- English that should usually be rewritten into natural Chinese:
+- when any retained technical terms or standalone key numbers appear inline within English prose, wrap them in backticks for visual separation
+- Non-technical foreign-language phrases that should usually be rewritten into natural English:
   - ordinary English phrases
   - abstract descriptive phrases in analytical prose
   - leftover English wording that has no clear reason to remain
-- when a first mention benefits from both forms, prefer Chinese-first wording with an English gloss in parentheses
-- do not leave phrases such as `reasoning dataset`, `distillation risk`, or `reward model quality` directly inside Chinese prose when a natural Chinese rendering is available
+- when a first mention benefits from both forms, prefer English-first wording with an original-language gloss in parentheses
+- do not leave phrases such as `reasoning dataset`, `distillation risk`, or `reward model quality` unedited; rewrite them into clear English equivalents when a natural rendering is available
 
 For non-trivial papers, the note should usually not stop at only broad `##` sections.
 It should use meaningful `###` subheadings where they improve technical clarity.
@@ -203,7 +203,7 @@ Use formulas sparingly and purposefully:
 
 ## Prose Cleanliness
 
-Chinese paragraphs should read like natural prose, not like PDF fragments.
+Paragraphs should read like natural English prose, not like PDF fragments.
 
 Do not leave:
 - mid-sentence line breaks after commas or semicolons
@@ -248,7 +248,7 @@ After `final_quality_review`, run `final_readability_review`.
 This review is a language-and-expression pass, not a second evidence-judgment pass:
 - improve fluency and readability
 - remove stiff translations
-- convert ordinary English phrase leftovers into natural Chinese
+- rewrite leftover informal or non-technical phrases into natural English
 - remove mechanical term-replacement artifacts such as `KV缓存 of`, `批量ing`, `In相关 Researcher`, or `Single 序列 generation`; figure/table callout titles and captions count too
 - keep stable proper nouns when forcing a translation would sound worse
 - do not invent new facts, numbers, comparisons, or failure cases during this pass

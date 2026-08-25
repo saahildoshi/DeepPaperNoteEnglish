@@ -12,7 +12,7 @@
 
 End users running Claude Code invoke the skill with natural language or the
 `/deeppapernote` slash command. Recognized trigger examples:
-- `给这篇论文生成深度笔记`
-- `写一篇高质量论文精读笔记`
-- `把这篇文章整理成 obsidian 笔记`
+- `Generate a deep-reading note for this paper`
+- `Write a high-quality paper reading note`
+- `Organize this article into an Obsidian note`
 - `/deeppapernote <paper title, DOI, arXiv ID, or local PDF path>`

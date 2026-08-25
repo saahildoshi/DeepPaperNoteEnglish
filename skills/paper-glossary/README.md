@@ -35,7 +35,7 @@ When article links are requested, provide the article Markdown path explicitly. 
 1. Run `plan_glossary.py --propose ... --output proposal.json`.
 2. Perform one semantic review, then record its exact ordered subset with `--review-proposal proposal.json --reviewed-terms ... --output reviewed.json`.
    If this produces an **empty reviewed shortlist**, report `no_candidates` and stop without displaying an empty selector.
-3. Display the complete reviewed shortlist as numbers and wait. Resolve number responses or `全部写入` to exact names outside the CLI.
+3. Display the complete reviewed shortlist as numbers and wait. Resolve number responses or `全部写入` (meaning `Write All`) to exact names outside the CLI.
 4. Run triage with `--reviewed-shortlist reviewed.json --terms ...`; `--terms` alone is rejected.
 5. Pass triage to inventory, inventory to the writer at the **configured glossary directory** (use `--config-path` only to select that device-local configuration), and successful writer results to the linker when an article was requested.
 

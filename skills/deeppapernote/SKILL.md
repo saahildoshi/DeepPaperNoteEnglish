@@ -10,11 +10,11 @@ Use this skill when the user wants one outcome:
 - generate a high-quality Markdown note
 - save the note into an Obsidian-style vault when configured, or into the current workspace when no vault is configured
 
-Chinese trigger examples:
-- `给这篇论文生成深度笔记`
-- `写一篇高质量论文精读笔记`
-- `把这篇文章整理成 obsidian 笔记`
-- `读这篇论文并生成 md 笔记`
+Trigger examples:
+- `Generate a deep-reading note for this paper`
+- `Write a high-quality paper reading note`
+- `Organize this article into an Obsidian note`
+- `Read this paper and generate MD notes`
 
 This skill is intentionally narrow:
 - it handles one paper at a time
@@ -74,14 +74,17 @@ Global no-short-circuit rule:
 - do not describe the whole task as complete while required downstream stages are still pending
 
 Completion-language rule:
-- say `笔记已完成` only when the required workflow is actually complete
-- say `已生成草稿` when drafting is done but lint, final readability review, or save is still pending
-- say `已通过校验` only when lint has actually been run and passed
-- say `已保存到 Obsidian` only when the write step has actually succeeded
-- do not treat `lint 已通过` as equivalent to `整篇笔记已经润色完成`
-- if final readability review is still pending, explicitly say the draft passed script lint but has not finished final language review
-- if the workflow stopped early, name the current stage and the still-missing required stages instead of using completion language
-- lint is a floor, not the writing objective
+- Use English completion phrases only; examples:
+  - `Note completed` only when the required workflow is actually complete
+  - `Draft generated` when drafting is done but lint, final readability review, or save is still pending
+  - `Validation passed` only when lint has actually been run and passed
+  - `Saved to Obsidian` only when the write step has actually succeeded
+- Do not treat `lint passed` as equivalent to `the whole note has been fully polished`
+- If final readability review is still pending, explicitly say the draft passed script lint but has not finished final language review
+- If the workflow stopped early, name the current stage and the still-missing required stages instead of using completion language
+- Lint is a floor, not the writing objective
+
+Strictly generate all final research notes and summaries in standard academic English.
 
 ## Core Execution Contract
 
@@ -92,10 +95,10 @@ Non-negotiable rules:
 - evidence-first: draft from the synthesis bundle, `source_manifest`, raw sections, coverage metadata, explicit `note_plan`, and inspected paper evidence; never finish from title/abstract/headings alone
 - raw-source authority: for ordinary PDFs, `*_raw_sections.jsonl` and `*_source_manifest.json` are the canonical reading material; old top-N evidence buckets, truncated `section_texts`, and `candidate_chunks` are not model-facing writing inputs
 - fail-closed: if a usable PDF or sufficient evidence cannot be obtained after supported acquisition paths, stop and ask for better source material rather than producing a finished degraded note
-- model-first: scripts structure evidence, but the model must decide emphasis, contribution, mechanism, limitations, and final Chinese prose
-- required structure: include the canonical required sections, with `原文摘要翻译` before `一句话总结` and a dedicated `创新点` section immediately after `原文摘要翻译`
-- abstract translation: when abstract metadata exists, `原文摘要翻译` is a faithful Chinese translation of the original abstract, not a bilingual block and not the model's own summary
-- mechanism depth: method, framework, and system papers should include `### 机制流程` under `方法主线`, normally as a 3 to 4 step numbered flow with input, operation, and output destination
+- model-first: scripts structure evidence, but the model must decide emphasis, contribution, mechanism, limitations, and final English prose. Strictly generate all final research notes and summaries in standard academic English.
+- required structure: include the canonical required sections, with `Original Abstract Translation` before `One-sentence Summary` and a dedicated `Key Contributions` section immediately after `Original Abstract Translation`
+- abstract translation: when abstract metadata exists, `Original Abstract Translation` should be a faithful English translation of the original abstract, not a bilingual block and not the model's own summary
+- mechanism depth: method, framework, and system papers should include `### Mechanism Flow` under `Method Mainline`, normally as a 3 to 4 step numbered flow with input, operation, and output destination
 - placeholder-first figures: plan major figure/table placeholders first; replace one only when identity match and visual usability are both strong; otherwise keep the placeholder
 - final quality gates: lint is a floor; after lint passes, first run `final_quality_review` for analytical depth, then run `final_readability_review` for language polish, and rerun lint if either review edits the note
 
@@ -141,13 +144,13 @@ Formal Save states:
 - Do not stop after a text-only draft just to ask whether the user wants figures inserted. Finish the figure replacement decision inside the same task unless the user explicitly asked for text only.
 - The note must use real heading levels: `#`, `##`, and `###`.
 - Every final note must start with an Obsidian YAML properties block above the `#` title heading. Include at least a `tags` field with a `papers/<domain>` value and useful `aliases`; include `date`, `doi`, or `arxiv_id` when known, and omit unavailable fields rather than inventing placeholders.
-- `## 核心信息` must be a fixed metadata block only. Use only these fields, in this order, as `- 字段名: 值` bullets: `标题`, `标题翻译`, `作者`, `机构`, `发表时间`, `发表渠道`, `DOI`, `arXiv`, `论文链接`, `代码 / 项目`, `数据 / 资源`, `论文类型`. Omit unavailable fields; put any guide sentence, takeaway, or analysis in `一句话总结` or a later section instead.
-- The note should include `原文摘要翻译` near the beginning when abstract metadata is available, before `一句话总结`.
-- When abstract metadata is available, `原文摘要翻译` should directly translate the original paper abstract into Chinese rather than restating it as your own summary.
-- The `原文摘要翻译` section itself should be Chinese-only; do not place English abstract sentences or English paragraph excerpts in that section.
-- Do not mix later judgments, innovation summaries, or hindsight explanations into `原文摘要翻译`; keep it as the original abstract translated into Chinese.
-- The note should include a dedicated `创新点` section immediately after `原文摘要翻译` and before `一句话总结`.
-- The `创新点` section should not be empty praise. It should enumerate the paper's actual innovations and briefly explain why each one matters.
+- `## Core Info` must be a fixed metadata block only. Use only these fields, in this order, as `- Field: Value` bullets: `Title`, `Title Translation`, `Authors`, `Affiliations`, `Publication Date`, `Venue`, `DOI`, `arXiv`, `Paper Link`, `Code / Project`, `Data / Resources`, `Paper Type`. Omit unavailable fields; put any guide sentence, takeaway, or analysis in `One-sentence Summary` or a later section instead.
+- The note should include `Original Abstract Translation` near the beginning when abstract metadata is available, before `One-sentence Summary`.
+- When abstract metadata is available, `Original Abstract Translation` should directly translate the original paper abstract into English rather than restating it as your own summary.
+- The `Original Abstract Translation` section itself should be English-only; do not place foreign-language abstract sentences or unrelated excerpts in that section.
+- Do not mix later judgments, innovation summaries, or hindsight explanations into `Original Abstract Translation`; keep it as a faithful translation of the original abstract into English.
+- The note should include a dedicated `Key Contributions` section immediately after `Original Abstract Translation` and before `One-sentence Summary`.
+- The `Key Contributions` section should not be empty praise. It should enumerate the paper's actual innovations and briefly explain why each one matters.
 - High-quality notes should usually contain multiple meaningful `###` subheadings in the technical sections when the paper is non-trivial.
 - Generate the complete figure/table decision table and satisfy the generated `writing_contract.figure_table_contract` before drafting or saving.
 - After the synthesis bundle is built, complete the model-led Visual Review Gate and Figure/Table Decision Freeze before creating `note_plan`; no `review_pending` item may cross that boundary.
