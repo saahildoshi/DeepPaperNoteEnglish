@@ -31,11 +31,28 @@ def github_json(url: str, retries: int = 3) -> object:
         "User-Agent": "deeppapernote-static-star-history",
         "X-GitHub-Api-Version": "2022-11-28",
     }
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = "Bearer " + token
+
     for attempt in range(retries + 1):
         request = urllib.request.Request(url, headers=headers)
         try:
             with urllib.request.urlopen(request, timeout=45) as response:
                 return json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            message = exc.reason if isinstance(exc.reason, str) else str(exc)
+            rate_limited = exc.code == 403 and "rate limit" in message.lower()
+            if rate_limited and attempt < retries:
+                retry_after = exc.headers.get("Retry-After") if exc.headers else None
+                delay = int(retry_after) if retry_after and retry_after.isdigit() else 2**attempt
+                time.sleep(delay)
+                continue
+            if rate_limited:
+                raise RuntimeError(
+                    f"GitHub API rate limit persisted after {retries + 1} attempts: {message}"
+                ) from exc
+            raise RuntimeError(f"GitHub request failed: HTTP {exc.code} {message}") from exc
         except (TimeoutError, OSError, urllib.error.URLError) as exc:
             if attempt == retries:
                 raise RuntimeError(f"GitHub request failed: {exc}") from exc
